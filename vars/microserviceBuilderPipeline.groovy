@@ -312,15 +312,17 @@ def call(body) {
 }
 
 def getDeployBranch () {
-  def deployBranch
-  container ('kubectl') {
-    def array = env.JOB_NAME.split("/")
-    def projectNamespace = array[0]
-    def projectName = array[1]
-    deployBranch = sh returnStdout: true, script: "kubectl get project ${projectName} --namespace=${projectNamespace} -o go-template='{{.spec.deployBranch}}'"
-    print "Deploy branch for project ${projectName} in namespace ${projectNamespace} is ${deployBranch}"
-  }
-  return deployBranch
+  return "master"
+ // todo
+ // def deployBranch
+ // container ('kubectl') {
+  //  def array = env.JOB_NAME.split("/")
+  //  def projectNamespace = array[0]
+  //  def projectName = array[1]
+  //  deployBranch = sh returnStdout: true, script: "kubectl get project ${projectName} --namespace=${projectNamespace} -o go-template='{{.spec.deployBranch}}'"
+  //  print "Deploy branch for project ${projectName} in namespace ${projectNamespace} is ${deployBranch}"
+  //}
+  //return deployBranch
 }
 
 def initalizeHelm () {
